@@ -27,7 +27,8 @@ const Coin = styled.li`
 
   a {
     transition: color 0.5s ease-in;
-    display: block;
+    display: flex;
+    align-items: center;
   }
   &:hover {
     a {
@@ -35,7 +36,11 @@ const Coin = styled.li`
     }
   }
 `;
-
+const Img = styled.img`
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+`;
 const Loader = styled.div`
   text-align: center;
   font-size: 40px;
@@ -58,10 +63,9 @@ const Coins = () => {
       const response = await fetch("https://api.coinpaprika.com/v1/coins");
       const json = await response.json();
       setCoins(json.slice(0, 100));
-      // setLoading(false);
+      setLoading(false);
     })();
   }, []);
-  console.log(coins);
   return (
     <Container>
       <Header>
@@ -73,7 +77,12 @@ const Coins = () => {
         <CoinsList>
           {coins.map((coin) => (
             <Coin key={coin.id}>
-              <Link to={`/${coin.id}`}> {coin.name} &rarr;</Link>
+              <Link to={`/${coin.id}`} state={{ name: coin.name }}>
+                <Img
+                  src={`https://static.coinpaprika.com/coin/${coin.id}/logo.png`}
+                />
+                {coin.name} &rarr;
+              </Link>
             </Coin>
           ))}
         </CoinsList>
