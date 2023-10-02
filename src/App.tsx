@@ -1,6 +1,7 @@
 import React from "react";
 import Router from "./Router";
 import { createGlobalStyle } from "styled-components";
+import { RouterProvider } from "react-router-dom";
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
@@ -69,7 +70,7 @@ const App = () => {
   return (
     <>
       <GlobalStyle />
-      <Router />
+      <RouterProvider router={Router} />
     </>
   );
 };
