@@ -2,6 +2,7 @@ import React from "react";
 import Router from "./Router";
 import { createGlobalStyle } from "styled-components";
 import { RouterProvider } from "react-router-dom";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
@@ -71,6 +72,7 @@ const App = () => {
     <>
       <GlobalStyle />
       <RouterProvider router={Router} />
+      <ReactQueryDevtools initialIsOpen={true} />
     </>
   );
 };

@@ -59,7 +59,6 @@ interface CoinInterface {
 
 const Coins = () => {
   const { isLoading, data } = useQuery<CoinInterface[]>("allCoins", fetchCoins);
-
   return (
     <Container>
       <Header>
