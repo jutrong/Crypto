@@ -58,7 +58,12 @@ interface CoinInterface {
 }
 
 const Coins = () => {
-  const { isLoading, data } = useQuery<CoinInterface[]>("allCoins", fetchCoins);
+  const { isLoading, data } = useQuery<CoinInterface[]>(
+    ["allCoins"],
+    fetchCoins
+  );
+  console.log(data);
+
   return (
     <Container>
       <Header>
@@ -68,11 +73,11 @@ const Coins = () => {
         <Loader>loading...</Loader>
       ) : (
         <CoinsList>
-          {data?.map((coin) => (
+          {data?.slice(0, 100).map((coin) => (
             <Coin key={coin.id}>
               <Link to={`/${coin.id}`} state={{ name: coin.name }}>
                 <Img
-                  src={`https://static.coinpaprika.com/coin/${coin.id}/logo.png`}
+                  src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
                 />
                 {coin.name} &rarr;
               </Link>
