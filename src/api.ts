@@ -15,7 +15,7 @@ export function fetchCoinTickers(coinId: string | undefined) {
     response.json()
   );
 }
-export const fetchCoinHistory = (coinId: string) => {
+export const fetchCoinHistory = (coinId: string | undefined) => {
   // const endDate = Math.floor(Date.now() / 1000);
   // const startDate = endDate - 60 * 60 * 23 * 7 * 1;
   return fetch(
