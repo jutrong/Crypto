@@ -168,7 +168,7 @@ const Coin = () => {
         <PrevBtn
           src={prevBtn}
           onClick={() => {
-            navigate(-1);
+            navigate("/");
           }}
         ></PrevBtn>
         <Title>

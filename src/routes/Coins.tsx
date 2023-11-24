@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
+import { useSetRecoilState } from "recoil";
+import { themeNameAtom } from "../atom";
+import { faPalette } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fetchCoins } from "../api";
+import { lightTheme, darkTheme } from "../theme";
 
 const Title = styled.h1`
   font-size: 48px;
@@ -47,6 +52,13 @@ const Loader = styled.div`
   text-align: center;
   font-size: 40px;
 `;
+
+const PaletteBtn = styled.div`
+  color: ${(props) => props.theme.accentColor};
+  font-size: ${(props) => props.theme.h3Size};
+  cursor: pointer;
+`;
+
 interface CoinInterface {
   id: string;
   name: string;
@@ -58,16 +70,22 @@ interface CoinInterface {
 }
 
 const Coins = () => {
+  const setThemeName = useSetRecoilState(themeNameAtom);
   const { isLoading, data } = useQuery<CoinInterface[]>(
     ["allCoins"],
     fetchCoins
   );
-  console.log(data);
+
+  const toggleTheme = () =>
+    setThemeName((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
 
   return (
     <Container>
       <Header>
         <Title>coin</Title>
+        <PaletteBtn onClick={toggleTheme}>
+          <FontAwesomeIcon icon={faPalette} />
+        </PaletteBtn>
       </Header>
       {isLoading ? (
         <Loader>loading...</Loader>
