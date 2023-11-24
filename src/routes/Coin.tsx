@@ -5,10 +5,13 @@ import {
   useLocation,
   useParams,
   useMatch,
+  useNavigate,
 } from "react-router-dom";
 import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
 import { styled } from "styled-components";
+
+import prevBtn from "../asset/prev.png";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -17,8 +20,8 @@ const Container = styled.div`
 `;
 const Header = styled.header`
   height: 10vh;
+  width: calc(100%-20px);
   display: flex;
-  justify-content: center;
   align-items: center;
 `;
 const Loader = styled.div`
@@ -28,6 +31,7 @@ const Loader = styled.div`
 const Title = styled.h1`
   font-size: 48px;
   color: ${(props) => props.theme.accentColor};
+  flex: 2;
 `;
 const Overview = styled.div`
   display: flex;
@@ -70,6 +74,10 @@ const Tab = styled.span<{ isActive: boolean }>`
   a {
     display: block;
   }
+`;
+const PrevBtn = styled.img`
+  text-align: left;
+  flex: 1;
 `;
 interface RouteState {
   state: {
@@ -135,6 +143,7 @@ const Coin = () => {
   const { state } = useLocation() as RouteState;
   const priceMatch = useMatch("/:coinId/price");
   const chartMatch = useMatch("/:coinId/chart");
+  const navigate = useNavigate();
 
   const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(
     ["info", coinId],
@@ -151,6 +160,12 @@ const Coin = () => {
   return (
     <Container>
       <Header>
+        <PrevBtn
+          src={prevBtn}
+          onClick={() => {
+            navigate(-1);
+          }}
+        ></PrevBtn>
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </Title>
