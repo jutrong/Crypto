@@ -23,6 +23,8 @@ const Header = styled.header`
   width: calc(100%-20px);
   display: flex;
   align-items: center;
+  justify-content: center;
+  position: relative;
 `;
 const Loader = styled.div`
   text-align: center;
@@ -31,7 +33,6 @@ const Loader = styled.div`
 const Title = styled.h1`
   font-size: 48px;
   color: ${(props) => props.theme.accentColor};
-  flex: 2;
 `;
 const Overview = styled.div`
   display: flex;
@@ -77,7 +78,11 @@ const Tab = styled.span<{ isActive: boolean }>`
 `;
 const PrevBtn = styled.img`
   text-align: left;
-  flex: 1;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  left: 0%;
+  cursor: pointer;
 `;
 interface RouteState {
   state: {
